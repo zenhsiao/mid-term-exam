@@ -23,5 +23,6 @@
 	<%= f.text_area :content %>
 	<%= f.submit %>
 <% end %>
+<%= paginate @comments %>
 
 <%=link_to "home",messages_path %>
