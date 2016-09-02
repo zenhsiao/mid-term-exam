@@ -1,0 +1,10 @@
+
+<%= form_for @message, :url=>messages_path do |f| %>
+	<%= f.label :category %>
+	<%= f.collection_select(:category_id, Category.all, :id, :name) %>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+	<%= f.label :content %>
+	<%= f.text_area :content %>
+	<%= f.submit %>
+<% end %>
