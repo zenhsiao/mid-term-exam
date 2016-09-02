@@ -11,7 +11,7 @@
 <% @comments.each do |c|%>	
 	<li>
 	<%= c.content %>
-	<%=link_to "delete",message_comment_path(@message,c),:method=>"delete" %>
+	<%=link_to "delete",message_comment_path(@message,c),:method=>"delete" if current_user.id==c.user_id %>
 	</li>
 <% end %>
 </ul>

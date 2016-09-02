@@ -6,8 +6,8 @@
 	<%= m.title %>
 	<%= m.created_at %>
 	<%=link_to "show",message_path(m) %>
-	<%=link_to "edit",edit_message_path(m) %>
-	<%=link_to "delete",message_path(m),:method=>"delete" %>
+	<%=link_to "edit",edit_message_path(m) if current_user==m.user %>
+	<%=link_to "delete",message_path(m),:method=>"delete" if current_user==m.user%>
 	</li>
 <% end %>
 </ul>
