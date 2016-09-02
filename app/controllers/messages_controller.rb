@@ -13,12 +13,18 @@ class MessagesController < ApplicationController
 	def create
 		@message=Message.new(message_params)
         @message.user=current_user
-        @message.save
-        redirect_to message_path(@message)
+        if @message.save
+        	flash[:notice]="更新成功"
+            redirect_to message_path(@message)
+        else
+        	render :action=>:new
+        end
 	end
 
 	def show
 		@message=Message.find(params[:id])
+		@comments=@message.comments.page(params[:page]).per(5)
+		@comment=Comment.new
 	end
 
 	def edit
@@ -31,10 +37,12 @@ class MessagesController < ApplicationController
 	end
 
 	def update
-		
-		@message.update(message_params)
+		if @message.update(message_params)
+			flash[:notice]="更新成功"
 		redirect_to message_path(@message)
-
+        else
+        	render :action=>:edit
+        end
 	end
 
 	def destroy

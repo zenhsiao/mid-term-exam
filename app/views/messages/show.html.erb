@@ -5,4 +5,23 @@
 <li><%= @message.content %></li>
 <li><%= @message.created_at %></li>
 </ul>
+
+<h3>comments</h3>
+<ul>
+<% @comments.each do |c|%>	
+	<li>
+	<%= c.content %>
+	<%=link_to "delete",message_comment_path(@message,c),:method=>"delete" %>
+	</li>
+<% end %>
+</ul>
+
+
+<%= form_for @comment, :url=>message_comments_path(@message) do |f| %>
+
+	<%= f.label :content %>
+	<%= f.text_area :content %>
+	<%= f.submit %>
+<% end %>
+
 <%=link_to "home",messages_path %>
